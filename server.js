@@ -74,7 +74,7 @@ router.route('/users/:user_id')
 	// Update the user with this id
 	.put(function(req, res) {
 		User.findById(req.params.user_id, function(err, user) {
-			if (err) res.send(err);
+			if (err) res.send(err);            
 			user.name = req.body.name;
 			user.save(function(err) {
 				if (err) res.send(err);
@@ -96,6 +96,8 @@ router.route('/users/:user_id')
 
 // REGISTER OUR ROUTES 
 app.use('/api', router);
+// Serve static files from public directory
+app.use(express.static('public'));
 
 // START THE SERVER
 app.listen(port);
