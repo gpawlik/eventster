@@ -20,3 +20,15 @@
         }
     }
 }
+.EventsList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+        padding: 10px 25px;
+        background-color: #3399ee;
+        &:nth-child(odd) {
+            background-color: #3399bb;
+        }
+    }    
+}

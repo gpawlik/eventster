@@ -61,6 +61,7 @@ router.route('/users')
 		
 		var user = new User();		// create a new instance of the User model
 		user.name = req.body.name;  // set the users name (comes from the request)
+		user.createdAt = Date.now();
 
 		user.save(function(err, user) {
 			if (err) res.send(err);			
@@ -71,7 +72,7 @@ router.route('/users')
 	// Get all the users 
     // accessed at GET http://localhost:3000/api/users
 	.get(function(req, res) {
-		User.find(function(err, users) {
+		User.find().limit(20).sort({ createdAt: 1 }).exec(function(err, users) {
 			if (err) res.send(err);            
 			res.json(users);
 		});

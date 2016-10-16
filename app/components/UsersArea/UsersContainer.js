@@ -1,8 +1,8 @@
 import React from 'react';
-import './styles/App.scss';
 import axios from 'axios';
+import UsersList from './UsersList';
 
-const App = React.createClass({    
+const UsersContainer = React.createClass({
     getInitialState: function() {
         this.getUsers();
         return { users: [] }
@@ -16,7 +16,7 @@ const App = React.createClass({
                 this.setState({ users: users });
             });
     },    
-    addNew: function() {
+    addUser: function() {
         const newUser = 'New USER ' + Math.round(Math.random()*100);       
               
         axios.post('/api/users', {
@@ -71,20 +71,14 @@ const App = React.createClass({
     },
     render() {         
         return (
-            <div className="App">
-                <h3>Users list</h3>
-                <ul className="UsersList">
-                {this.state.users.map((user, idx) => {
-                    return (<li key={idx}>{user.name} 
-                                <button onClick={this.deleteUser.bind(this, user._id)}>delete</button>
-                                <button onClick={this.editUser.bind(this, user)}>edit</button>
-                            </li>);
-                })}
-                </ul>
-                <button onClick={this.addNew}>Add new</button>
-            </div>
+            <UsersList 
+                users={this.state.users}
+                editUser={this.editUser}
+                deleteUser={this.deleteUser} 
+                addUser={this.addUser} 
+            />
         )
-    }
+    }        
 });
 
-export default App;
+export default UsersContainer;
