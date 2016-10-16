@@ -18,18 +18,35 @@ app.use(bodyParser.json());
 var port = process.env.PORT || 3000; 
 
 // Connect to the DB
-mongoose.connect('mongodb://localhost:27017/eventster'); 
+var db_address = "localhost:27017/eventster";
 
-// create our router
+mongoose.connection.on("open", function(ref) {
+  return console.log("Connected to mongo server!");
+});
+
+mongoose.connection.on("error", function(err) {
+  console.log("Could not connect to mongo server!");
+  return console.log(err.message);
+});
+
+try {
+  mongoose.connect("mongodb://" + db_address);
+  db = mongoose.connection;
+  console.log("Started connection on " + ("mongodb://" + db_address) + ", waiting for it to open...");
+} catch (err) {
+  console.log(("Setting up failed to connect to " + db_address), err.message);
+}
+
+// Create our router
 var router = express.Router();
 
-// middleware to use for all requests
+// Middleware to use for all requests
 router.use(function(req, res, next) {
 	console.log('Something is happening.');
 	next();
 });
 
-// test route to make sure everything is working 
+// Test route to make sure everything is working 
 // accessed at GET http://localhost:3000/api
 router.get('/', function(req, res) {
 	res.json({ message: 'hooray! welcome to our api!' });	
