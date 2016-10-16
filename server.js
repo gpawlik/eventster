@@ -1,11 +1,12 @@
 // BASE SETUP
 // =============================================================================
-var express    = require('express');
-var bodyParser = require('body-parser');
-var app        = express();
-var morgan     = require('morgan');
-var mongoose   = require('mongoose');
-var User       = require('./app/models/user');
+const express    = require('express');
+const bodyParser = require('body-parser');
+const path       = require('path');
+const morgan     = require('morgan');
+const mongoose   = require('mongoose');
+const User       = require('./app/models/user');
+const app        = express();
 
 // configure app
 app.use(morgan('dev')); // log requests to the console
@@ -15,10 +16,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Specify port
-var port = process.env.PORT || 3000; 
+const port = process.env.PORT || 3000; 
 
 // Connect to the DB
-var db_address = "localhost:27017/eventster";
+const db_address = "localhost:27017/eventster";
 
 mongoose.connection.on("open", function(ref) {
   return console.log("Connected to mongo server!");
@@ -31,14 +32,14 @@ mongoose.connection.on("error", function(err) {
 
 try {
   mongoose.connect("mongodb://" + db_address);
-  var db = mongoose.connection;
+  const db = mongoose.connection;
   console.log("Started connection on " + ("mongodb://" + db_address) + ", waiting for it to open...");
 } catch (err) {
   console.log(("Setting up failed to connect to " + db_address), err.message);
 }
 
 // Create our router
-var router = express.Router();
+const router = express.Router();
 
 // Middleware to use for all requests
 router.use(function(req, res, next) {
@@ -59,7 +60,7 @@ router.route('/users')
     // accessed at POST http://localhost:3000/users
 	.post(function(req, res) {				
 		
-		var user = new User();		// create a new instance of the User model
+		const user = new User();		// create a new instance of the User model
 		user.name = req.body.name;  // set the users name (comes from the request)
 		user.createdAt = Date.now();
 
@@ -117,6 +118,13 @@ router.route('/users/:user_id')
 app.use('/api', router);
 // Serve static files from public directory
 app.use(express.static('public'));
+
+// Handle every other route with index.html, which will contain
+// a script tag to your application's JavaScript file(s).
+// All the rest of the routing is a React concern.
+app.get('*', function (request, response){
+  response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+})
 
 // START THE SERVER
 app.listen(port);
