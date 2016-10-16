@@ -1,7 +1,22 @@
 .App {
-    color: green;
+    padding: 20px;
     h3 {
-        color: blueviolet;
-        margin: 60px auto;
+        color: orangered;
+        margin: 20px auto;
+    }
+    ul {
+        list-style-type: none;
+    }
+}
+.UsersList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+        padding: 10px 25px;
+        background-color: #dedede;
+        &:nth-child(odd) {
+            background-color: #cecece;
+        }
     }
 }

@@ -31,7 +31,7 @@ mongoose.connection.on("error", function(err) {
 
 try {
   mongoose.connect("mongodb://" + db_address);
-  db = mongoose.connection;
+  var db = mongoose.connection;
   console.log("Started connection on " + ("mongodb://" + db_address) + ", waiting for it to open...");
 } catch (err) {
   console.log(("Setting up failed to connect to " + db_address), err.message);
@@ -57,14 +57,14 @@ router.route('/users')
 
 	// Create a user 
     // accessed at POST http://localhost:3000/users
-	.post(function(req, res) {
+	.post(function(req, res) {				
 		
 		var user = new User();		// create a new instance of the User model
 		user.name = req.body.name;  // set the users name (comes from the request)
 
-		user.save(function(err) {
-			if (err) res.send(err);
-			res.json({ message: 'User created!' });
+		user.save(function(err, user) {
+			if (err) res.send(err);			
+			res.json({ message: 'User created!', user: user });
 		});		
 	})
 
@@ -72,9 +72,8 @@ router.route('/users')
     // accessed at GET http://localhost:3000/api/users
 	.get(function(req, res) {
 		User.find(function(err, users) {
-			if (err) res.send(err);
-            var userList = users.map((item) => item.name);
-			res.json(userList);
+			if (err) res.send(err);            
+			res.json(users);
 		});
 	});
 
@@ -91,11 +90,13 @@ router.route('/users/:user_id')
 	// Update the user with this id
 	.put(function(req, res) {
 		User.findById(req.params.user_id, function(err, user) {
-			if (err) res.send(err);            
+			if (err) res.send(err);     
+			console.log('BODY', req.body);       
 			user.name = req.body.name;
-			user.save(function(err) {
-				if (err) res.send(err);
-				res.json({ message: 'User updated!' });
+			user.save(function(err, user) {
+				if (err) res.send(err);	
+				console.log(user);			
+				res.json({ message: 'User updated!', user: user });
 			});
 		});
 	})
