@@ -92,8 +92,7 @@ router.route('/users/:user_id')
 	// Update the user with this id
 	.put(function(req, res) {
 		User.findById(req.params.user_id, function(err, user) {
-			if (err) res.send(err);     
-			console.log('BODY', req.body);       
+			if (err) res.send(err);     			      
 			user.name = req.body.name;
 			user.save(function(err, user) {
 				if (err) res.send(err);	
@@ -123,7 +122,8 @@ app.use(express.static('public'));
 // a script tag to your application's JavaScript file(s).
 // All the rest of the routing is a React concern.
 app.get('*', function (request, response){
-  response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+	console.log('Request: [GET]', request.originalUrl);
+	response.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 })
 
 // START THE SERVER

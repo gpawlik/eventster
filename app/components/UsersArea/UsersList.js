@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const UsersList = React.createClass({    
     render() {         
@@ -11,6 +12,7 @@ const UsersList = React.createClass({
                         <li key={idx}>{user.name} 
                             <button onClick={() => this.props.deleteUser(user._id) }>delete</button>
                             <button onClick={() => this.props.editUser(user) }>edit</button>
+                            <Link to={'/user/' + user._id}>Show profile</Link>
                         </li>
                     );
                 })}

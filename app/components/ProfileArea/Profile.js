@@ -1,13 +1,11 @@
 import React from 'react';
 
-const Profile = React.createClass({
-    render() {
-        return (
-            <div className="Profile">
-                <h3>Profile: user.name</h3>
-            </div>
-        );
-    }
-});
-
-export default Profile;
+export default function (props) {
+    return (
+        <div className="UserProfile">
+            <h3>User Profile</h3>
+            <p>Name: {props.user.name}</p>
+            <p>Created: {props.user.createdAt}</p>
+        </div>
+    )
+}

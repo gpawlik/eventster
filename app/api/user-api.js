@@ -3,9 +3,17 @@ import store from '../store';
 import * as actions from '../actions/UserActions';
 
 export function getUsers() {
-    return axios.get('api/users')
+    return axios.get('/api/users')
         .then(response => { 
             store.dispatch(actions.getUsersSuccess(response.data));             
+            return response;
+        });
+};
+
+export function getUser(userId) {
+    return axios.get('/api/users/' + userId)
+        .then(response => { 
+            store.dispatch(actions.getUserSuccess(response.data));             
             return response;
         });
 };

@@ -6,7 +6,9 @@ new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,  
   inline: true,  
   stats: { colors: true },  
-  contentBase: 'public/',  
+  contentBase: 'public/', 
+  historyApiFallback: true,
+  hot: true, 
   proxy: {
     '*': 'http://localhost:3000' // proxy requests for the external API server
   }

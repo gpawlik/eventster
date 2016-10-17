@@ -5,6 +5,13 @@ export function getUsersSuccess(users) {
     }
 };
 
+export function getUserSuccess(user) {
+    return {
+        type: 'GET_USER_SUCCESS',
+        user
+    }
+};
+
 export function addUserSuccess(user) {
     return {
         type: 'ADD_USER_SUCCESS',
