@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
 
 // Reducers
 import usersReducer from './users-reducer';
@@ -9,7 +10,8 @@ import profileReducer from './profile-reducer';
 var reducers = combineReducers({
     usersState: usersReducer,
     eventsState: eventsReducer,
-    profileState: profileReducer
+    profileState: profileReducer,
+    form: formReducer
 });
 
 export default reducers;
