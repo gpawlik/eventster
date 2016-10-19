@@ -8,7 +8,8 @@ const Profile = React.createClass({
         return (
             <div className="UserProfile">
                 <h3>User Profile</h3>
-                <p>Name: {this.props.user.name}</p>
+                <p>Name: {this.props.user.username}</p>
+                <p>Email: {this.props.user.email}</p>
                 <p>Created: {timeCreated}</p>
             </div>
         )        

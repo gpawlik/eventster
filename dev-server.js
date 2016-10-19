@@ -6,7 +6,7 @@ new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,  
   inline: true,  
   stats: { colors: true },  
-  contentBase: 'public/', 
+  contentBase: 'publice/', 
   historyApiFallback: true,
   hot: true, 
   proxy: {

@@ -8,6 +8,7 @@ import MainLayout from './components/MainLayout';
 import UsersContainer from './components/UsersArea/UsersContainer';
 import EventsContainer from './components/EventsArea/EventsContainer';
 import ProfileContainer from './components/ProfileArea/ProfileContainer';
+import SignupContainer from './components/SignupArea/SignupContainer';
 import About from './components/AboutArea/About';
 import Login from './components/LoginArea/Login';
 
@@ -18,5 +19,6 @@ export default (
     <Route path="/user/:userId" component={ProfileContainer} />            
     <Route path="/about" component={About} />
     <Route path="/login" component={Login} />
+    <Route path="/signup" component={SignupContainer} />
   </Route>
 );

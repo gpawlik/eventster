@@ -9,6 +9,7 @@ export default function() {
                 <li><Link to="/users">Users</Link></li>                                
                 <li><Link to="/about">About</Link></li>
                 <li><Link to="/login">Login</Link></li>
+                <li><Link to="/signup">Signup</Link></li>
             </ul>
         </nav>
     )

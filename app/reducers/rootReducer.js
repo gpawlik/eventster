@@ -1,17 +1,17 @@
 import { combineReducers } from 'redux';
-import { reducer as formReducer } from 'redux-form';
 
 // Reducers
 import usersReducer from './users-reducer';
 import eventsReducer from './events-reducer';
 import profileReducer from './profile-reducer';
+import flashReducer from './flash-reducer';
 
 // Combine Reducers
-var reducers = combineReducers({
+var rootReducer = combineReducers({
     usersState: usersReducer,
     eventsState: eventsReducer,
     profileState: profileReducer,
-    form: formReducer
+    flashReducer: flashReducer
 });
 
-export default reducers;
+export default rootReducer;

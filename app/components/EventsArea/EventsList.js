@@ -8,7 +8,7 @@ class EventsList extends React.Component {
                 <ul className="EventsList">
                 {this.props.users.map((user, idx) => {
                     return (
-                        <li key={idx}>{user.name} 
+                        <li key={idx}>{user.username} 
                             <button onClick={() => this.props.deleteUser(user._id) }>delete</button>
                             <button onClick={() => this.props.editUser(user) }>edit</button>
                         </li>
