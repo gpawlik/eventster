@@ -3,6 +3,7 @@ import './../styles/App.scss';
 import Header from './HeaderArea/Header';
 import Navigation from './NavigationArea/Navigation';
 import UsersList from './UsersArea/UsersList';
+import MessageList from './MessageArea/MessageList';
 
 class MainLayout extends React.Component {   
     render () {
@@ -11,6 +12,7 @@ class MainLayout extends React.Component {
                 <Header />
                 <Navigation />
                 <main>
+                <MessageList />
                 {this.props.children}
                 </main>
             </div>

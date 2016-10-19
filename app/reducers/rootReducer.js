@@ -11,7 +11,7 @@ var rootReducer = combineReducers({
     usersState: usersReducer,
     eventsState: eventsReducer,
     profileState: profileReducer,
-    flashReducer: flashReducer
+    flashState: flashReducer
 });
 
 export default rootReducer;
