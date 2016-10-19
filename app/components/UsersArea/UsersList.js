@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const UsersList = React.createClass({    
+class UsersList extends React.Component {    
     render() {         
         return (
             <div className="UsersListArea">
-                <h3>Users list</h3>
+                <h3>Users list?</h3>
                 <ul className="UsersList">
                 {this.props.users.map((user, idx) => {
                     return (
@@ -21,6 +21,6 @@ const UsersList = React.createClass({
             </div>
         )
     }
-});
+};
 
 export default UsersList;

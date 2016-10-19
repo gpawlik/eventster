@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import TextFieldGroup from '../../common/TextFieldGroup';
-import { login } from '../../actions/LoginActions';
+import validateInput from '../../../server/shared/validations/login';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -19,35 +19,22 @@ class LoginForm extends React.Component {
     
     onSubmit(e) {
         e.preventDefault();
-        if(this.isValid()) {            
+        if(true) {            
             this.setState({ errors: {}, isLoading: true });
             this.props.login(this.state).then(
-                (res) => this.context.router.push('/'),
-                (err) => this.setState({ errors: err.data.errors, isLoading: false })
+                (res) => this.context.router.push('/')                
+            ).catch(
+                (err) => {this.setState({ errors: err.response.data, isLoading: false })}
             );
         }
     } 
     
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
-    }
-    
-    validateContact(data) {
-        const errors = {};
-        if (!data.identifier || data.identifier.trim() === '') {
-            errors.identifier = 'Enter a Title';
-        }
-        if (!data.password || data.password.trim() === '') {
-            errors.password = 'Enter a Password';
-        }
-        return { 
-            errors,
-            isValid: !Object.keys(errors).length
-        };
-    }  
+    }   
     
     isValid() {
-        const { errors, isValid } = this.validateContact(this.state); 
+        const { errors, isValid } = validateInput(this.state); 
         if(!isValid) {
             this.setState({ errors });
         }
@@ -88,4 +75,4 @@ LoginForm.contextTypes = {
     router: React.PropTypes.object.isRequired
 }
 
-export default connect(null, { login })(LoginForm);
+export default LoginForm;

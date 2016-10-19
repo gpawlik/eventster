@@ -1,10 +1,10 @@
 import React from 'react';
 
-const EventsList = React.createClass({    
+class EventsList extends React.Component {    
     render() {         
         return (
             <div className="EventsListArea">
-                <h3>Events list</h3>
+                <h3>Events list?!</h3>
                 <ul className="EventsList">
                 {this.props.users.map((user, idx) => {
                     return (
@@ -19,6 +19,6 @@ const EventsList = React.createClass({
             </div>
         )
     }
-});
+};
 
 export default EventsList;

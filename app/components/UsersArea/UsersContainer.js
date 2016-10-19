@@ -5,11 +5,11 @@ import UsersList from './UsersList';
 import * as userApi from '../../api/user-api';
 import store from '../../store';
 
-const UsersContainer = React.createClass({
+class UsersContainer extends React.Component {
     
-    componentDidMount: function() {
+    componentDidMount() {
         userApi.getUsers()
-    },
+    }
 
     render() {         
         return (
@@ -17,11 +17,11 @@ const UsersContainer = React.createClass({
                 users={this.props.users}
                 addUser={userApi.addUser}
                 editUser={userApi.editUser}
-                deleteUser={userApi.deleteUser}                  
+                deleteUser={userApi.deleteUser}             
             />
         )
     }        
-});
+};
 
 const mapStateToProps = function(store) {
     return {

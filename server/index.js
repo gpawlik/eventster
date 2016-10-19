@@ -7,16 +7,24 @@ import User from './models/user';
 
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config.dev';
 
 const app = express();
 
-//import auth from './server/routes/auth';
+import auth from './routes/auth';
 
 // configure app
 app.use(morgan('dev')); // log requests to the console
 
-app.use(webpackMiddleware(webpack(webpackConfig)));
+const compiler = webpack(webpackConfig);
+
+app.use(webpackMiddleware(compiler, {
+    hot: true,
+    publicPath: webpackConfig.output.publicPath,
+    noInfo: true // eliminate noise from webpack
+}));
+app.use(webpackHotMiddleware(compiler));
 
 // configure body parser - Let us pull POST content from HTTP request
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -122,7 +130,8 @@ router.route('/users/:user_id')
 
 // REGISTER OUR ROUTES 
 app.use('/api', router);
-//app.use('/api/auth', auth);
+app.use('/api/auth', auth);
+
 // Serve static files from public directory
 app.use(express.static('public'));
 
@@ -131,7 +140,7 @@ app.use(express.static('public'));
 // All the rest of the routing is a React concern.
 app.get('*', function (request, response){
 	console.log('Request: [GET]', request.originalUrl);
-	response.sendFile(path.resolve(__dirname, 'public', 'index.html'));
+	response.sendFile(path.join(__dirname, 'public', 'index.html'));
 })
 
 // START THE SERVER

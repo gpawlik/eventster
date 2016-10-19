@@ -4,14 +4,18 @@ import Header from './HeaderArea/Header';
 import Navigation from './NavigationArea/Navigation';
 import UsersList from './UsersArea/UsersList';
 
-export default function(props) {        
-    return (
-        <div className="MainLayout">
-            <Header />
-            <Navigation />
-            <main>
-            {props.children}
-            </main>
-        </div>
-    )
+class MainLayout extends React.Component {   
+    render () {
+        return (
+            <div className="MainLayout">
+                <Header />
+                <Navigation />
+                <main>
+                {this.props.children}
+                </main>
+            </div>
+        )        
+    }     
 };
+
+export default MainLayout;
