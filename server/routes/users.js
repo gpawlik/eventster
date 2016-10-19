@@ -1,6 +1,7 @@
 import express from 'express';
 import User from './../models/user';
 import validateInput from '../shared/validations/signup';
+import bcrypt from 'bcrypt';
 
 let router = express.Router();
 
@@ -10,17 +11,18 @@ router.post('/', function(req, res) {
     const { errors, isValid } = validateInput(req.body);
     
     if (isValid) {
-        // Create a new instance of the User model
+        const { username, email, password } = req.body;   
+        const password_digest = bcrypt.hashSync(password, 10);     
         const user = new User();
-        user.username = req.body.username;
-        user.email = req.body.email; 
-        user.password = req.body.password;  
+        
+        user.username = username;
+        user.email = email; 
+        user.password = password_digest;  
         user.createdAt = Date.now();
 
-        user.save(function(err, user) {
-            if (err) res.send(err);			
-            res.json({ message: 'User created!', user: user });
-        });	        
+        user.save()
+            .then(user => res.json({ message: 'User created!', user: user }))
+            .catch(err => res.status(500).json({ error: err }));	        
     }
     else {
         res.status(400).json(errors);
