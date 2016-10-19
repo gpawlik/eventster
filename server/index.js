@@ -1,15 +1,22 @@
-// BASE SETUP
-// =============================================================================
-const express    = require('express');
-const bodyParser = require('body-parser');
-const path       = require('path');
-const morgan     = require('morgan');
-const mongoose   = require('mongoose');
-const User       = require('./app/models/user');
-const app        = express();
+import express from 'express';
+import bodyParser from 'body-parser';
+import path from 'path';
+import morgan from 'morgan';
+import mongoose from 'mongoose';
+import User from './models/user';
+
+import webpack from 'webpack';
+import webpackMiddleware from 'webpack-dev-middleware';
+import webpackConfig from '../webpack.config.dev';
+
+const app = express();
+
+//import auth from './server/routes/auth';
 
 // configure app
 app.use(morgan('dev')); // log requests to the console
+
+app.use(webpackMiddleware(webpack(webpackConfig)));
 
 // configure body parser - Let us pull POST content from HTTP request
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -115,6 +122,7 @@ router.route('/users/:user_id')
 
 // REGISTER OUR ROUTES 
 app.use('/api', router);
+//app.use('/api/auth', auth);
 // Serve static files from public directory
 app.use(express.static('public'));
 
