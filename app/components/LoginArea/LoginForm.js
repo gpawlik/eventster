@@ -46,6 +46,9 @@ class LoginForm extends React.Component {
         const { identifier, password, errors, isLoading } = this.state;
         return(
             <form onSubmit={this.onSubmit}>
+            
+                { errors.form }
+            
                 <TextFieldGroup 
                     field="identifier"
                     label="Usersname / Email"

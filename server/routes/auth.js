@@ -1,17 +1,36 @@
 import express from 'express';
 import validateInput from '../shared/validations/login';
+import User from './../models/user';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import config from '../config';
 
 let router = express.Router();
 
 router.post('/', (req, res) => {
-    const { errors, isValid } = validateInput(req.body);
+    const { identifier, password } = req.body;
     
-    if(isValid) {
-        res.json({ success: true })
-    }
-    else {
-        res.status(400).json(errors);
-    }
+    return User.findOne({ $or: [{ username: identifier }, { email: identifier }] })
+        .then(user => {
+            if(user) {
+                if(bcrypt.compareSync(password, user.password)) {
+                    
+                    const token = jwt.sign({ // payload - don't put sensible information here
+                        id: user._id,
+                        username: user.username
+                    }, config.jwtSecret);
+                    
+                    res.json({ token });
+                }
+                else {
+                    res.status(401).json({ form: 'Invalid Credentials!' });
+                }
+            }
+            else {
+                res.status(401).json({ form: 'Invalid Credentials!' });
+            }
+        })
+        .catch(err => console.log('DB error', err));
     
 });
 
