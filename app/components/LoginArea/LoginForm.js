@@ -33,7 +33,7 @@ class LoginForm extends React.Component {
         this.setState({ [e.target.name]: e.target.value });
     }   
     
-    isValid() {
+    isValid() {        
         const { errors, isValid } = validateInput(this.state); 
         if(!isValid) {
             this.setState({ errors });

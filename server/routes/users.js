@@ -1,32 +1,55 @@
 import express from 'express';
 import User from './../models/user';
-import validateInput from '../shared/validations/signup';
+import signupValidations from '../shared/validations/signup';
 import bcrypt from 'bcrypt';
+import isEmpty from 'lodash/isEmpty';
 
 let router = express.Router();
+
+// Validate if the username or email already exist
+function validateInput(data, otherValidations) {
+        
+    let { errors } = otherValidations(data);
+    
+    return User.findOne({ $or: [{ username: data.username }, { email: data.email }] })
+        .then(user => {            
+            if (user) {
+                if (data.username === user.username) {
+                    errors.username = 'Username already exists';
+                }
+                if (data.email === user.email) {
+                    errors.email = 'Email already exists';
+                }                
+            }
+            return {
+                errors,
+                isValid: isEmpty(errors)
+            }
+        });
+}
 
 // Create a user
 router.post('/', function(req, res) {				
 		
-    const { errors, isValid } = validateInput(req.body);
-    
-    if (isValid) {
-        const { username, email, password } = req.body;   
-        const password_digest = bcrypt.hashSync(password, 10);     
-        const user = new User();
-        
-        user.username = username;
-        user.email = email; 
-        user.password = password_digest;  
-        user.createdAt = Date.now();
-
-        user.save()
-            .then(user => res.json({ message: 'User created!', user: user }))
-            .catch(err => res.status(500).json({ error: err }));	        
-    }
-    else {
-        res.status(400).json(errors);
-    }
+    validateInput(req.body, signupValidations).then(({ errors, isValid }) => {        
+        if (isValid) {
+            const { username, email, password } = req.body;   
+            const password_hash = bcrypt.hashSync(password, 10);     
+            const newUser = new User({
+                username: username,
+                email: email,
+                password: password_hash,  
+                createdAt: Date.now()                
+            });
+            
+            newUser.save()
+                .then(user => res.json({ message: 'User created!', user: user }))
+                .catch(err => res.status(500).json({ error: err }));	        
+        }
+        else {
+            res.status(400).json(errors);
+        }        
+    });   
         	
 });
 

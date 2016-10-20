@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose';
 
-var UserSchema = new Schema({
-	username: String,
-	email: String,
+const Schema = mongoose.Schema;
+const UserSchema = new Schema({
+	username: { type: String, unique: true }, // unique not working if not specified in DB itself?
+	email: { type: String, unique: true },
 	password: String,
 	createdAt: Date,
 	updatedAt: { 
@@ -12,4 +12,4 @@ var UserSchema = new Schema({
 	},
 });
 
-module.exports = mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema);
