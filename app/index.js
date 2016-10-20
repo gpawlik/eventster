@@ -11,7 +11,7 @@ import { setCurrentUser } from './actions/authActions';
 // Set token after page reload
 if(localStorage.jwtToken) {
     setAuthorizationToken(localStorage.jwtToken); 
-    store.dispatch(setCurrentUser(jwtDecode(token))); 
+    store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken))); 
 }
 
 ReactDOM.render(
