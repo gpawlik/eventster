@@ -35,5 +35,10 @@ export default {
   },
   resolve: {
     extensions: ['', '.js']
+  },
+  // disable jwt dependencies that dont exist for browser
+  node: {
+    net: 'empty',
+    dns: 'empty'
   }
 };

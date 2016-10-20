@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginForm from './LoginForm';
 import { connect } from 'react-redux';
-import { login } from '../../actions/login';
+import { login } from '../../actions/authActions';
 
 
 class Login extends React.Component {
