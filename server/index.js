@@ -12,6 +12,7 @@ import webpackConfig from '../webpack.config.dev';
 import main from './routes/main';
 import auth from './routes/auth';
 import users from './routes/users';
+import events from './routes/events';
 
 const app = express();
 const port = process.env.PORT || 3000; 
@@ -55,6 +56,7 @@ try {
 app.use('/api', main);
 app.use('/api/auth', auth);
 app.use('/api/users', users);
+app.use('/api/events', events);
 
 // Serve static files from public directory
 app.use(express.static('public'));
