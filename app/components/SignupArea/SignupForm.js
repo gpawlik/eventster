@@ -12,12 +12,33 @@ class LoginForm extends React.Component {
             password: '',
             passwordConfirmation: '',
             errors: {},
-            isLoading: false
+            isLoading: false,
+            invalid: false
         }
         
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
+        this.checkUserExists = this.checkUserExists.bind(this);
     }   
+    
+    checkUserExists(e) {
+        const field = e.target.name;
+        const val = e.target.value;
+        if (val !== '') {
+            this.props.isUserExists(val).then(res => {
+                let errors = this.state.errors;
+                let invalid;
+                if (res.data.user) {
+                    errors[field] = 'There is user with such ' + field;
+                    invalid = true;
+                } else {
+                    errors[field] = '';
+                    invalid = false;
+                }
+                this.setState({ errors, invalid });
+            });
+        }
+    }
     
     onSubmit(e) {
         e.preventDefault();
@@ -51,7 +72,7 @@ class LoginForm extends React.Component {
     
     render() {
         // deconstruct variables from state
-        const { username, email, password, passwordConfirmation, errors, isLoading } = this.state;
+        const { username, email, password, passwordConfirmation, errors, isLoading, invalid } = this.state;
         return(
             <form onSubmit={this.onSubmit}>
                 <TextFieldGroup 
@@ -60,6 +81,7 @@ class LoginForm extends React.Component {
                     value={username}
                     error={errors.username}
                     onChange={this.onChange}
+                    checkUserExists={this.checkUserExists}
                 />
                 <TextFieldGroup 
                     field="email"
@@ -67,6 +89,7 @@ class LoginForm extends React.Component {
                     value={email}
                     error={errors.email}
                     onChange={this.onChange}
+                    checkUserExists={this.checkUserExists}
                     type="email"
                 />
                 <TextFieldGroup 
@@ -85,7 +108,7 @@ class LoginForm extends React.Component {
                     onChange={this.onChange}
                     type="password"
                 />
-                <button disabled={isLoading}>Login</button>
+                <button disabled={isLoading || invalid}>Login</button>
             </form>
         );
     }
@@ -93,7 +116,8 @@ class LoginForm extends React.Component {
 
 LoginForm.propTypes = {
     userSignupRequest: React.PropTypes.func.isRequired,
-    addFlashMessage: React.PropTypes.func.isRequired
+    addFlashMessage: React.PropTypes.func.isRequired,
+    isUserExists: React.PropTypes.func.isRequired
 }
 
 LoginForm.contextTypes = {

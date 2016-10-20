@@ -61,6 +61,15 @@ router.get('/', function(req, res) {
     });
 });
 
+// Get users by identifier
+router.get('/:identifier', function(req, res) {
+    const identifier = req.params.identifier;
+    User.findOne({ $or: [{ username: identifier }, { email: identifier }] })
+        .then(user => {
+            res.json({ user });
+        })
+});
+
 // Get the user with a specific id
 router.get('/:user_id', function(req, res) {
     User.findById(req.params.user_id, function(err, user) {

@@ -15,7 +15,7 @@ class LoginForm extends React.Component {
         
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
-    }   
+    }
     
     onSubmit(e) {
         e.preventDefault();
