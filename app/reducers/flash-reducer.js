@@ -5,14 +5,21 @@ import findIndex from 'lodash/findIndex';
 export default (state = [], action) => {
     switch(action.type) {
         case ADD_FLASH_MESSAGE:
-            return [
-                ...state,
-                {
-                    id: shortid.generate(), // generate random ID so we can delete it easily later
-                    type: action.message.type,
-                    text: action.message.text,
-                }
-            ]
+            const messageExists = findIndex(state, { category: action.message.category });
+            if(messageExists >= 0) {
+                return state;
+            }
+            else {
+                return [
+                    ...state,
+                    {
+                        id: shortid.generate(), // generate random ID so we can delete it easily later
+                        type: action.message.type,
+                        text: action.message.text,
+                        category: action.message.category
+                    }
+                ]                
+            }
         case DELETE_FLASH_MESSAGE:
             const index = findIndex(state, { id: action.id })            
             if(index >= 0) {

@@ -48,7 +48,8 @@ class LoginForm extends React.Component {
                 () => {
                     this.props.addFlashMessage({
                         type: 'success',
-                        text: 'User succesfully created!'
+                        text: 'User succesfully created!',
+                        category: 'user_created'
                     });
                     this.context.router.push('/login') // why is better than browserHistory.push() ?
                 }            

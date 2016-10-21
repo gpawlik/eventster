@@ -10,7 +10,8 @@ export default function(ComposedComponent) {
             if(!this.props.isAuthenticated) {
                 this.props.addFlashMessage({
                     type: 'error',
-                    text: 'You need to be authenticated to view this page'
+                    text: 'You need to be authenticated to view this page',
+                    category: 'user_need_auth'
                 });
                 this.context.router.push('/login');
             }
