@@ -93,7 +93,7 @@ NewEventPage.propTypes = {
 };
 
 NewEventPage.contextTypes = {
-    router: React.PropTypes.func.isRequired
+    router: React.PropTypes.object.isRequired
 };
 
 export default connect(null, { createEvent, addFlashMessage })(NewEventPage);

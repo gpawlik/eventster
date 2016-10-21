@@ -37,11 +37,19 @@ router.get('/', (req, res) => {
     });
 });
 
-// Get the event with a specific id
 router.get('/:eventId', function(req, res) {
     Event.findById(req.params.eventId, function(err, event) {
         if (err) res.send(err);
         res.json(event);
+    });
+});
+
+router.delete('/:eventId', authenticate, function(req, res) {
+    Event.remove({
+        _id: req.params.eventId
+    }, function(err, event) {
+        if (err) res.send(err);
+        res.json({ message: 'Successfully deleted' });
     });
 });
 

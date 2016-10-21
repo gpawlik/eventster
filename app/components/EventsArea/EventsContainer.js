@@ -3,7 +3,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import EventsList from './EventsList';
 import * as eventsApi from '../../api/events-api';
-import { getEvents } from '../../actions/eventActions';
+import { getEvents, deleteEvent } from '../../actions/eventActions';
 import store from '../../store';
 
 class EventsContainer extends React.Component {
@@ -18,11 +18,16 @@ class EventsContainer extends React.Component {
                 events={this.props.events}
                 addEvent={eventsApi.addEvent}
                 editEvent={eventsApi.editEvent}
-                deleteEvent={eventsApi.deleteEvent}                
+                deleteEvent={this.props.deleteEvent}                
             />
         )
     }        
 };
+
+EventsContainer.propTypes = {
+    events: React.PropTypes.array.isRequired,
+    deleteEvent: React.PropTypes.func.isRequired
+}
 
 const mapStateToProps = function(store) {
     return {
@@ -30,4 +35,4 @@ const mapStateToProps = function(store) {
     };
 };
 
-export default connect(mapStateToProps, { getEvents })(EventsContainer);
+export default connect(mapStateToProps, { getEvents, deleteEvent })(EventsContainer);

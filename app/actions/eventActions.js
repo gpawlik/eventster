@@ -35,3 +35,15 @@ export function createEvent(data) {
         return axios.post('/api/events', data);
     }
 }
+
+export function deleteEvent(eventId) {
+    return dispatch => {
+        return axios.delete('/api/events/' + eventId)
+            .then(res => {                
+                dispatch({
+                    type: DELETE_EVENT_SUCCESS,
+                    eventId
+                }); 
+            }); 
+    }
+}
