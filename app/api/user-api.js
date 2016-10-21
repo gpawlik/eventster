@@ -13,7 +13,7 @@ export function getUsers() {
 export function getUser(userId) {
     return axios.get('/api/users/' + userId)
         .then(response => { 
-            store.dispatch(actions.getUserSuccess(response.data));             
+            store.dispatch(actions.getUserSuccess(response.data.user));             
             return response;
         });
 };

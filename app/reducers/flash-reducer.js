@@ -6,10 +6,7 @@ export default (state = [], action) => {
     switch(action.type) {
         case ADD_FLASH_MESSAGE:
             const messageExists = findIndex(state, { category: action.message.category });
-            if(messageExists >= 0) {
-                return state;
-            }
-            else {
+            if(messageExists < 0) {
                 return [
                     ...state,
                     {
@@ -18,7 +15,7 @@ export default (state = [], action) => {
                         text: action.message.text,
                         category: action.message.category
                     }
-                ]                
+                ] 
             }
         case DELETE_FLASH_MESSAGE:
             const index = findIndex(state, { id: action.id })            

@@ -12,7 +12,7 @@ class UsersList extends React.Component {
                         <li key={idx}>{user.username} 
                             <button onClick={() => this.props.deleteUser(user._id) }>delete</button>
                             <button onClick={() => this.props.editUser(user) }>edit</button>
-                            <Link to={'/user/' + user._id}>Show profile!</Link>
+                            <Link to={'/user/' + user.username}>Show profile!</Link>
                         </li>
                     );
                 })}
