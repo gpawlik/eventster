@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import TextFieldGroup from '../../common/TextFieldGroup';
 import { createEvent } from '../../actions/eventActions';
+import { addFlashMessage } from '../../actions/flash';
 
 class NewEventPage extends React.Component {
     
@@ -9,6 +10,9 @@ class NewEventPage extends React.Component {
         super(props);
         this.state= {
             title: '',
+            headline: '',
+            description: '',
+            eventDate: '',
             errors: {},
             isLoading: false
         }
@@ -23,13 +27,22 @@ class NewEventPage extends React.Component {
     
     onSubmit(e) {
         e.preventDefault();
-        this.props.createEvent(this.state).then(res => {
-            console.log(res.data);
-        });
+        this.props.createEvent(this.state)
+            .then(() => {
+                this.props.addFlashMessage({
+                    type: 'success',
+                    text: 'Event succesfully created!',
+                    category: 'event_created'
+                });
+                this.context.router.push('/')
+            })
+            .catch(
+                (err) => {this.setState({ errors: err.response.data, isLoading: false })}
+            );
     }
     
     render () {
-        const { title, errors, isLoading } = this.state;
+        const { title, headline, description, eventDate, errors, isLoading } = this.state;
         
         return (
             <form onSubmit={this.onSubmit}>
@@ -43,6 +56,30 @@ class NewEventPage extends React.Component {
                     onChange={this.onChange}
                 />
                 
+                <TextFieldGroup 
+                    field="headline"
+                    label="Event headline"
+                    value={headline}
+                    error={errors.headline}
+                    onChange={this.onChange}
+                />
+                
+                <TextFieldGroup 
+                    field="description"
+                    label="Event description"
+                    value={description}
+                    error={errors.description}
+                    onChange={this.onChange}
+                />
+                
+                <TextFieldGroup 
+                    field="eventDate"
+                    label="Event date"
+                    value={eventDate}
+                    error={errors.eventDate}
+                    onChange={this.onChange}
+                />
+                
                 <button type="submit">Submit event</button>
             </form>
         );
@@ -51,7 +88,12 @@ class NewEventPage extends React.Component {
 }
 
 NewEventPage.propTypes = {
-    createEvent: React.PropTypes.func.isRequired
+    createEvent: React.PropTypes.func.isRequired,
+    addFlashMessage: React.PropTypes.func.isRequired
 };
 
-export default connect(null, { createEvent })(NewEventPage);
+NewEventPage.contextTypes = {
+    router: React.PropTypes.func.isRequired
+};
+
+export default connect(null, { createEvent, addFlashMessage })(NewEventPage);

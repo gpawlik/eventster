@@ -18,10 +18,20 @@ export function getEvents() {
     }
 }
 
+export function getEvent(eventId) {
+    return dispatch => {
+        return axios.get('/api/events/' + eventId)
+            .then(res => { 
+                dispatch({
+                    type: GET_EVENT_SUCCESS,
+                    event: res.data
+                });                       
+            });
+    }
+};
+
 export function createEvent(data) {
     return dispatch => {
-        return axios.post('/api/events', data).then(res => {
-            
-        });
+        return axios.post('/api/events', data);
     }
 }

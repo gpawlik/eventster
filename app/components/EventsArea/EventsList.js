@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 class EventsList extends React.Component {    
     render() {   
@@ -9,9 +10,10 @@ class EventsList extends React.Component {
                 <ul className="EventsList">
                     {events.map((event, idx) => {
                         return (
-                            <li key={idx}>{event.name} 
+                            <li key={idx}>{event.title} 
                                 <button onClick={() => deleteEvent(event._id) }>delete</button>
                                 <button onClick={() => editEvent(event) }>edit</button>
+                                <Link to={'/event/' + event._id}>Show event!</Link>
                             </li>
                         );
                     })}
