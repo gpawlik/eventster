@@ -13,11 +13,10 @@ router.post('/', (req, res) => {
     return User.findOne({ $or: [{ username: identifier }, { email: identifier }] })
         .then(user => {
             if(user) {
-                if(bcrypt.compareSync(password, user.password)) {
-                    
+                if(bcrypt.compareSync(password, user.password)) {                    
                     const token = jwt.sign({ // payload - don't put sensible information here
                         id: user._id,
-                        username: user.username,
+                        username: user.username,                        
                         isAdmin: user.isAdmin
                     }, config.jwtSecret);
                     

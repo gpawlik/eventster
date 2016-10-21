@@ -1,12 +1,12 @@
 import express from 'express';
 import Event from '../models/event';
-import authenticate from '../middleware/authenticate';
+import adminRestricted from '../middleware/adminRestricted';
 import validateInput from '../shared/validations/event';
 
 let router = express.Router();
 
 // Create an event
-router.post('/', authenticate, function(req, res) {				
+router.post('/', adminRestricted, function(req, res) {				
 		
     const { errors, isValid } = validateInput(req.body);
             
@@ -44,7 +44,7 @@ router.get('/:eventId', function(req, res) {
     });
 });
 
-router.delete('/:eventId', authenticate, function(req, res) {
+router.delete('/:eventId', adminRestricted, function(req, res) {
     Event.remove({
         _id: req.params.eventId
     }, function(err, event) {

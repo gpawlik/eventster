@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import requireAuth from './utils/requireAuth';
+import requireAdmin from './utils/requireAdmin';
 
 // Layouts
 import MainLayout from './components/MainLayout';
@@ -20,10 +21,10 @@ export default (
   <Route component={MainLayout}>
     <Route path="/" component={EventsContainer} />
     <Route path="/event/:eventId" component={EventPageContainer} />  
-    <Route path="/users" component={UsersContainer} />
-    <Route path="/user/:userId" component={ProfileContainer} />               
-    <Route path="/about" component={About} />
-    <Route path="/new-event" component={requireAuth(NewEventPage)} />
+    <Route path="/users" component={requireAdmin(UsersContainer)} />
+    <Route path="/user/:userId" component={requireAuth(ProfileContainer)} />
+    <Route path="/new-event" component={requireAdmin(NewEventPage)} />               
+    <Route path="/about" component={About} />    
     <Route path="/login" component={Login} />
     <Route path="/signup" component={SignupContainer} />
   </Route>

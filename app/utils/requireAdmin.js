@@ -4,22 +4,21 @@ import { addFlashMessage } from '../actions/flash';
 
 // Wrap the component in HOC - higher order component
 export default function(ComposedComponent) {
-    class Authenticate extends React.Component {
+    class Admin extends React.Component {
         
         componentWillMount() {
-            if(!this.props.isAuthenticated) {
+            if(!this.props.isAuthenticated || !this.props.isAdmin) {
                 this.props.addFlashMessage({
                     type: 'error',
-                    text: 'You need to be authenticated to view this page',
-                    category: 'user_need_auth'
-                });                
-                this.context.router.push('/login'); 
-                // TODO: router is slow enough to let the ComposedComponent mount...                           
+                    text: 'You need to be an admin to view this page',
+                    category: 'user_need_admin'
+                });
+                this.context.router.push('/login');
             }
         }
         
         componentWillUpdate(nextProps) {
-            if(!nextProps.isAuthenticated) {
+            if(!nextProps.isAuthenticated && !nextProps.isAdmin) {
                 this.context.router.push('/');
             }
         }
@@ -31,21 +30,23 @@ export default function(ComposedComponent) {
         }
     }  
     
-    Authenticate.propTypes = {
+    Admin.propTypes = {
         isAuthenticated: React.PropTypes.bool.isRequired,
+        isAdmin: React.PropTypes.bool,
         addFlashMessage: React.PropTypes.func.isRequired
     };
     
-    Authenticate.contextTypes = {
+    Admin.contextTypes = {
         router: React.PropTypes.object.isRequired
     }
     
     function mapStateToProps(state) {
         return {
-            isAuthenticated: state.authState.isAuthenticated
+            isAuthenticated: state.authState.isAuthenticated,
+            isAdmin: state.authState.user.isAdmin
         }
     }
     
-    return connect(mapStateToProps, { addFlashMessage })(Authenticate);  
+    return connect(mapStateToProps, { addFlashMessage })(Admin);  
 }
 

@@ -1,6 +1,8 @@
 import express from 'express';
 import User from './../models/user';
 import signupValidations from '../shared/validations/signup';
+import adminRestricted from '../middleware/adminRestricted';
+import authenticate from '../middleware/authenticate';
 import bcrypt from 'bcrypt';
 import isEmpty from 'lodash/isEmpty';
 
@@ -29,7 +31,7 @@ function validateInput(data, otherValidations) {
 }
 
 // Create a user
-router.post('/', function(req, res) {				
+router.post('/', adminRestricted, function(req, res) {				
 		
     validateInput(req.body, signupValidations).then(({ errors, isValid }) => {        
         if (isValid) {
@@ -54,15 +56,19 @@ router.post('/', function(req, res) {
 });
 
 // Get all the users
-router.get('/', function(req, res) {
-    User.find().limit(20).sort({ createdAt: 1 }).exec(function(err, users) {
-        if (err) res.send(err);            
-        res.json(users);
-    });
+router.get('/', adminRestricted, function(req, res) {
+    User.find()
+        .limit(20)
+        .sort({ createdAt: 1 })
+        .select('username email createdAt')
+        .exec(function(err, users) {
+            if (err) res.send(err);            
+            res.json(users);
+        });
 });
 
 // Get users by identifier
-router.get('/:identifier', function(req, res) {
+router.get('/:identifier', authenticate, function(req, res) {
     const identifier = req.params.identifier;
     User.findOne({ $or: [{ username: identifier }, { email: identifier }] })
         .select('username email isAdmin')
@@ -71,16 +77,8 @@ router.get('/:identifier', function(req, res) {
         })
 });
 
-// Get the user with a specific id
-router.get('/:user_id', function(req, res) {
-    User.findById(req.params.user_id, function(err, user) {
-        if (err) res.send(err);
-        res.json(user);
-    });
-});
-
 // Update the user with the specific id
-router.put('/:user_id', function(req, res) {
+router.put('/:user_id', adminRestricted, function(req, res) {
     User.findById(req.params.user_id, function(err, user) {
         if (err) res.send(err);     			      
         user.name = req.body.name;
@@ -93,7 +91,7 @@ router.put('/:user_id', function(req, res) {
 });
 
 // Delete the user with the specific id
-router.delete('/:user_id', function(req, res) {
+router.delete('/:user_id', adminRestricted, function(req, res) {
     User.remove({
         _id: req.params.user_id
     }, function(err, user) {

@@ -28,14 +28,20 @@ class NavigationBar extends React.Component {
             </ul>
         );
         
+        const adminLinks = (
+            <ul>
+                <li><Link to="/users">Users</Link></li> 
+                <li><Link to="/new-event">New event</Link></li> 
+            </ul>
+        );
+        
         return (
             <nav className="MainNav">
                 <ul>
-                    <li><Link to="/">Events</Link></li>
-                    <li><Link to="/users">Users</Link></li>                                
-                    <li><Link to="/about">About</Link></li>
-                    <li><Link to="/new-event">New event</Link></li>                     
+                    <li><Link to="/">Events</Link></li>                                                   
+                    <li><Link to="/about">About</Link></li>                                        
                 </ul>
+                { user.isAdmin ? adminLinks : '' }
                 { isAuthenticated ? userLinks : guestLinks } 
             </nav>
         )        

@@ -8,6 +8,7 @@ import store from '../../store';
 class ProfileContainer extends React.Component {
     
     componentDidMount() {
+        console.log('why even trying?');
         this.fetchUserData(this.props.params.userId);
     }
     
