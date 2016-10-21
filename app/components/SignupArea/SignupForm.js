@@ -50,7 +50,7 @@ class LoginForm extends React.Component {
                         type: 'success',
                         text: 'User succesfully created!'
                     });
-                    this.context.router.push('/') // why is better than browserHistory.push() ?
+                    this.context.router.push('/login') // why is better than browserHistory.push() ?
                 }            
             ).catch(
                 (err) => {this.setState({ errors: err.response.data, isLoading: false })}
