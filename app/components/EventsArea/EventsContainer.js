@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import EventsList from './EventsList';
-import * as eventsApi from '../../api/events-api';
 import { getEvents, deleteEvent } from '../../actions/eventActions';
 import store from '../../store';
 
@@ -16,8 +15,6 @@ class EventsContainer extends React.Component {
         return (
             <EventsList 
                 events={this.props.events}
-                addEvent={eventsApi.addEvent}
-                editEvent={eventsApi.editEvent}
                 deleteEvent={this.props.deleteEvent}                
             />
         )

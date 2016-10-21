@@ -1,17 +1,11 @@
 import axios from 'axios';
-import { 
-    GET_EVENTS_SUCCESS, 
-    GET_EVENT_SUCCESS, 
-    ADD_EVENT_SUCCESS, 
-    EDIT_EVENT_SUCCESS, 
-    DELETE_EVENT_SUCCESS 
-} from './types';
+import * as types from './types';
 
 export function getEvents() {
     return dispatch => {
         return axios.get('/api/events').then(res => {                        
             dispatch({
-                type: GET_EVENTS_SUCCESS,
+                type: types.GET_EVENTS_SUCCESS,
                 events: res.data
             })
         });
@@ -23,7 +17,7 @@ export function getEvent(eventId) {
         return axios.get('/api/events/' + eventId)
             .then(res => { 
                 dispatch({
-                    type: GET_EVENT_SUCCESS,
+                    type: types.GET_EVENT_SUCCESS,
                     event: res.data
                 });                       
             });
@@ -41,7 +35,7 @@ export function deleteEvent(eventId) {
         return axios.delete('/api/events/' + eventId)
             .then(res => {                
                 dispatch({
-                    type: DELETE_EVENT_SUCCESS,
+                    type: types.DELETE_EVENT_SUCCESS,
                     eventId
                 }); 
             }); 

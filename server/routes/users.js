@@ -65,6 +65,7 @@ router.get('/', function(req, res) {
 router.get('/:identifier', function(req, res) {
     const identifier = req.params.identifier;
     User.findOne({ $or: [{ username: identifier }, { email: identifier }] })
+        .select('username email isAdmin')
         .then(user => {
             res.json({ user });
         })

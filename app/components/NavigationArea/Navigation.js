@@ -12,11 +12,12 @@ class NavigationBar extends React.Component {
      
     render() {
         
-        const { isAuthenticated } = this.props.auth;
+        const { isAuthenticated, user } = this.props.auth;
         
         const userLinks = (
             <ul>
-                <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>         
+                <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>  
+                <li><Link to={'/user/' + user.username}>My profile</Link></li>       
             </ul>
         );
         

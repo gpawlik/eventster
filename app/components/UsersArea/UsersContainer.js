@@ -2,26 +2,30 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import UsersList from './UsersList';
-import * as userApi from '../../api/user-api';
+import { getUsers, deleteUser } from '../../actions/userActions';
 import store from '../../store';
 
 class UsersContainer extends React.Component {
     
     componentDidMount() {
-        userApi.getUsers()
+        this.props.getUsers()
     }
 
     render() {         
         return (
             <UsersList 
                 users={this.props.users}
-                addUser={userApi.addUser}
-                editUser={userApi.editUser}
-                deleteUser={userApi.deleteUser}             
+                deleteUser={this.props.deleteUser}             
             />
         )
     }        
 };
+
+UsersContainer.propTypes = {
+    users: React.PropTypes.array.isRequired,
+    getUsers: React.PropTypes.func.isRequired,
+    deleteUser: React.PropTypes.func.isRequired
+}
 
 const mapStateToProps = function(store) {
     return {
@@ -29,4 +33,4 @@ const mapStateToProps = function(store) {
     };
 };
 
-export default connect(mapStateToProps)(UsersContainer);
+export default connect(mapStateToProps, { getUsers, deleteUser })(UsersContainer);

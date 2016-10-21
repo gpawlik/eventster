@@ -2,22 +2,21 @@ import React from 'react';
 import { Link } from 'react-router';
 
 class UsersList extends React.Component {    
-    render() {                 
+    render() {      
+        const { users, deleteUser } = this.props;            
         return (
             <div className="UsersListArea">
                 <h3>Users list?</h3>
                 <ul className="UsersList">
-                {this.props.users.map((user, idx) => {
+                {users.map((user, idx) => {
                     return (
                         <li key={idx}>{user.username} 
-                            <button onClick={() => this.props.deleteUser(user._id) }>delete</button>
-                            <button onClick={() => this.props.editUser(user) }>edit</button>
+                            <button onClick={() => deleteUser(user._id) }>delete</button>  
                             <Link to={'/user/' + user.username}>Show profile!</Link>
                         </li>
                     );
                 })}
-                </ul>
-                <button onClick={this.props.addUser}>Add new user</button>
+                </ul>                
             </div>
         )
     }

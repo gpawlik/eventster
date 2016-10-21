@@ -2,13 +2,23 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import Profile from './Profile';
-import * as userApi from '../../api/user-api';
+import { getUser } from '../../actions/userActions';
 import store from '../../store';
 
 class ProfileContainer extends React.Component {
     
     componentDidMount() {
-        userApi.getUser(this.props.params.userId)
+        this.fetchUserData(this.props.params.userId);
+    }
+    
+    componentWillReceiveProps(newProps) {
+        if(newProps.params.userId !== this.props.params.userId) {
+            this.fetchUserData(newProps.params.userId);
+        }        
+    }
+    
+    fetchUserData(userId) {
+        this.props.getUser(userId);
     }
 
     render() {         
@@ -24,4 +34,4 @@ const mapStateToProps = function(store) {
     };
 };
 
-export default connect(mapStateToProps)(ProfileContainer);
+export default connect(mapStateToProps, { getUser })(ProfileContainer);
