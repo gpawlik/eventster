@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 class UsersList extends React.Component {    
-    render() {         
+    render() {                 
         return (
             <div className="UsersListArea">
                 <h3>Users list?</h3>

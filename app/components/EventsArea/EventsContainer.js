@@ -1,23 +1,24 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import UsersList from './EventsList';
-import * as userApi from '../../api/user-api';
+import EventsList from './EventsList';
+import * as eventsApi from '../../api/events-api';
+import { getEvents } from '../../actions/eventActions';
 import store from '../../store';
 
 class EventsContainer extends React.Component {
     
     componentDidMount() {
-        userApi.getUsers()
+        this.props.getEvents();
     }
 
     render() {         
         return (
-            <UsersList 
-                users={this.props.users}
-                addUser={userApi.addUser}
-                editUser={userApi.editUser}
-                deleteUser={userApi.deleteUser}                
+            <EventsList 
+                events={this.props.events}
+                addEvent={eventsApi.addEvent}
+                editEvent={eventsApi.editEvent}
+                deleteEvent={eventsApi.deleteEvent}                
             />
         )
     }        
@@ -25,8 +26,8 @@ class EventsContainer extends React.Component {
 
 const mapStateToProps = function(store) {
     return {
-        users: store.usersState.users
+        events: store.eventsState.events
     };
 };
 
-export default connect(mapStateToProps)(EventsContainer);
+export default connect(mapStateToProps, { getEvents })(EventsContainer);

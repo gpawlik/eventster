@@ -1,21 +1,22 @@
 import React from 'react';
 
 class EventsList extends React.Component {    
-    render() {         
+    render() {   
+        const { events, addEvent, editEvent, deleteEvent } = this.props;              
         return (
             <div className="EventsListArea">
-                <h3>Events list?!</h3>
+                <h3>Events list</h3>
                 <ul className="EventsList">
-                {this.props.users.map((user, idx) => {
-                    return (
-                        <li key={idx}>{user.username} 
-                            <button onClick={() => this.props.deleteUser(user._id) }>delete</button>
-                            <button onClick={() => this.props.editUser(user) }>edit</button>
-                        </li>
-                    );
-                })}
+                    {events.map((event, idx) => {
+                        return (
+                            <li key={idx}>{event.name} 
+                                <button onClick={() => deleteEvent(event._id) }>delete</button>
+                                <button onClick={() => editEvent(event) }>edit</button>
+                            </li>
+                        );
+                    })}
                 </ul>
-                <button onClick={this.props.addUser}>Add new user</button>
+                <button onClick={addEvent}>Add new event</button>
             </div>
         )
     }
