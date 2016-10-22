@@ -1,198 +1,24 @@
 @import 'utils/colors';
+@import 'components/common';
+@import 'components/layout';
 
-* {
-    box-sizing: border-box;
-}
-body {
-    font-family: 'Lato', cursive;
-}
-body, h1, h2, h3, ul, li {
-    padding: 0;
-    margin: 0;
-}
-ul {
-    list-style-type: none;
-}
-a {
-    text-decoration: none;
-    color: #333;
-    &:hover {
-        color: $primary-dark;
-    }
-}
+@import 'components/header';
+@import 'components/navigation';
+@import 'components/footer';
 
-.Header {
-    background: $primary-dark;
-    padding: 10px 25px;
-    h1 {
-        color: $primary-light;
-    }
-}
-.MainNav {
-    background: $secondary-light;
-    display:flex;
-    ul {      
-        flex-grow: 1;          
-        &.AccountLinks {
-            background: darken($secondary-light, 10%);
-        }
-    }
-    li {
-        display: inline-block;
-        a {
-            display:block;
-            padding: 5px 15px; 
-            color: $primary-light;           
-        }
-    }
-}
-.MainLayout {
-    h3 {
-        color: $primary-dark;
-        padding: 10px 25px;
-    }
-}
-.UsersList,
-.EventsList {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    li {
-        padding: 10px 35px 10px 25px;
-        background-color: $primary-light;
-        position: relative;       
-        &:nth-child(odd) {
-            background-color: darken($primary-light, 10%);
-        }
-        a {
-            display: flex;
-            align-items: center;                         
-        }
-        .delete-icon {
-            color: $primary-dark;
-        }
-    }
-}
-.EventsList {
-    li {
-        a {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-    }
-}
-.thumbnail-small {
-    display: inline-block;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: $secondary-dark;     
-}
-.user-item-title {
-    padding: 0 15px;
-}
-.list-item-title {
-    display:block;  
-    font-weight: bold;  
-}
-.list-item-headline {
-    display:block;    
-}
-.delete-icon {    
-    font-weight: bold;
-    cursor:pointer;
-    text-align: center;    
-    display: block;
-    width: 20px;
-    height: 20px;
-    line-height:20px;
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translate(0, -50%)
-}
-.helper-link {
-    display: block;
-    font-size: 0.8em;
-    text-align: center;
-}
-.UserProfileForm {
-    input, select {
-        display: block;
-        margin-bottom: 10px;
-    }
-}
-.content-wrapper {
-    padding: 0 25px;
-}
-.profile-image {
-    display: block;
-    height: 250px;
-    background-color: $secondary-dark; 
-}
-.profile-thumbnail {
-    display: block;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background-color: $secondary-dark; 
-    border: 7px solid lighten($secondary-dark, 10%);   
-    margin: 0 auto;
-}
-.profile-label {
-    color: $primary-dark;
-    display: block;
-    font-size: 0.8em;
-}
-.Messages {
-    background-color: $primary-dark;
-    color: $primary-light;
-    li {
-        padding: 5px 25px;
-        position: relative;
-        .delete-icon {
-            color: $primary-light;            
-        }
-    }
-}
+@import 'components/profile';
 
-.form-box {
-    padding: 20px 0;
-}
-.form-input-group {
-    margin-bottom: 15px;
-}
-.form-label {
-    display: block;
-    font-size: 0.8em;
-    font-weight: bold;
-    margin-bottom: 5px;
-    .form-input-error & {
-        color: $primary-dark;
-    }
-}
-.form-input {
-    width: 100%;
-    padding: 10px 10px;
-    border-radius: 3px;
-    border: 1px solid $secondary-light;
-}
-.form-error-label {
-    font-size: 0.8em;
-    color: $primary-dark;
-}
-.button-primary {
-    width: 100%;
-    background-color: $primary-dark;
-    color: $primary-light;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 3px;
-    font-size: 1.2em;
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 5px;    
-    &:hover {
-        background-color: darken($primary-dark, 5%)
-    }
-}
+@import 'components/lists';
+@import 'components/forms';
+@import 'components/buttons';
+@import 'components/icons';
+@import 'components/messages';
+
+
+
+
+
+
+
+
+

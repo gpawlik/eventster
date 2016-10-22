@@ -66,7 +66,7 @@ class LoginForm extends React.Component {
                     type="password"
                 />
                 <button disabled={isLoading} className="button-primary">Login</button>
-                <Link to="/signup" className="helper-link">Don't have account? Sign up!</Link>
+                <Link to="/signup" className="secondary-link">Don't have account? Sign up!</Link>
             </form>
         );
     }

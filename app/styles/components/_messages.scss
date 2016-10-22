@@ -1,0 +1,11 @@
+.Messages {
+    background-color: $primary-dark;
+    color: $primary-light;
+    li {
+        padding: 5px 25px;
+        position: relative;
+        .delete-icon {
+            color: $primary-light;            
+        }
+    }
+}

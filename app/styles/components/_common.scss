@@ -1,0 +1,24 @@
+//TODO: normalize in more professional way
+* {
+    box-sizing: border-box;
+}
+html {
+    height: 100%;
+}
+body {
+    font-family: 'Lato', cursive;
+}
+body, h1, h2, h3, ul, li {
+    padding: 0;
+    margin: 0;
+}
+ul {
+    list-style-type: none;
+}
+a {
+    text-decoration: none;
+    color: #333;
+    &:hover {
+        color: $primary-dark;
+    }
+}

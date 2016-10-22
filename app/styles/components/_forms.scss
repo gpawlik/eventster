@@ -1,0 +1,25 @@
+.form-box {
+    padding: 20px 0;
+}
+.form-input-group {
+    margin-bottom: 15px;
+}
+.form-label {
+    display: block;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    .form-input-error & {
+        color: $primary-dark;
+    }
+}
+.form-input {
+    width: 100%;
+    padding: 10px 10px;
+    border-radius: 3px;
+    border: 1px solid $secondary-light;
+}
+.form-error-label {
+    font-size: 0.8em;
+    color: $primary-dark;
+}

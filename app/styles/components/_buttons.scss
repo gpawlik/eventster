@@ -1,0 +1,21 @@
+.button-primary {
+    width: 100%;
+    background-color: $primary-dark;
+    color: $primary-light;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 5px;    
+    &:hover {
+        background-color: darken($primary-dark, 5%)
+    }
+}
+
+.secondary-link {
+    display: block;
+    font-size: 0.8em;
+    text-align: center;
+}

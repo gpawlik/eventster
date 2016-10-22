@@ -1,0 +1,23 @@
+.Footer {
+    background-color: $primary-dark;
+    color: $primary-light;
+    text-align: center;
+    padding: 0 25px;
+    
+}
+.footer-headline {
+    font-weight: bold;
+}
+.footer-links {
+    display: flex;  
+    justify-content: center;
+    margin-bottom: 20px;
+    li {
+        a {
+            padding: 5px 20px;
+            text-transform: uppercase;
+            color: $primary-light;   
+            font-size: 0.8em; 
+        }        
+    }  
+}

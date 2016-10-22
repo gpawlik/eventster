@@ -1,0 +1,13 @@
+.delete-icon {    
+    font-weight: bold;
+    cursor:pointer;
+    text-align: center;    
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height:20px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translate(0, -50%)
+}

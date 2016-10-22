@@ -1,0 +1,18 @@
+.MainNav {
+    background: $secondary-light;
+    display:flex;
+    ul {      
+        flex-grow: 1;          
+        &.AccountLinks {
+            background: darken($secondary-light, 10%);
+        }
+    }
+    li {
+        display: inline-block;
+        a {
+            display:block;
+            padding: 5px 15px; 
+            color: $primary-light;           
+        }
+    }
+}

@@ -1,0 +1,46 @@
+.UsersList,
+.EventsList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    li {
+        padding: 10px 35px 10px 25px;
+        background-color: $primary-light;
+        position: relative;       
+        &:nth-child(odd) {
+            background-color: darken($primary-light, 10%);
+        }
+        a {
+            display: flex;
+            align-items: center;                         
+        }
+        .delete-icon {
+            color: $primary-dark;
+        }
+    }
+}
+.EventsList {
+    li {
+        a {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+}
+.thumbnail-small {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: $secondary-dark;     
+}
+.user-item-title {
+    padding: 0 15px;
+}
+.list-item-title {
+    display:block;  
+    font-weight: bold;  
+}
+.list-item-headline {
+    display:block;    
+}

@@ -1,0 +1,19 @@
+.profile-image {
+    display: block;
+    height: 250px;
+    background-color: $secondary-dark; 
+}
+.profile-thumbnail {
+    display: block;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: $secondary-dark; 
+    border: 7px solid lighten($secondary-dark, 10%);   
+    margin: 0 auto;
+}
+.profile-label {
+    color: $primary-dark;
+    display: block;
+    font-size: 0.8em;
+}
