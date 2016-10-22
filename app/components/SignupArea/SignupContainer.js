@@ -10,11 +10,13 @@ class SignupPage extends React.Component {
         return(
             <div>
                 <h3>SignUp Area</h3>
-                <SignupForm 
-                    userSignupRequest={userSignupRequest} 
-                    isUserExists={isUserExists}
-                    addFlashMessage={addFlashMessage} 
-                    />
+                <div className="content-wrapper">
+                    <SignupForm 
+                        userSignupRequest={userSignupRequest} 
+                        isUserExists={isUserExists}
+                        addFlashMessage={addFlashMessage} 
+                        />
+                </div>
             </div>
         );
     }

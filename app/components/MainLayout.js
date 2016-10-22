@@ -12,8 +12,8 @@ class MainLayout extends React.Component {
                 <Header />
                 <Navigation />
                 <main>
-                <MessageList />
-                {this.props.children}
+                    <MessageList />
+                    {this.props.children}
                 </main>
             </div>
         )        

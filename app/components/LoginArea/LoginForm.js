@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import TextFieldGroup from '../../common/TextFieldGroup';
 import validateInput from '../../../server/shared/validations/login';
+import { Link } from 'react-router';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -65,6 +66,7 @@ class LoginForm extends React.Component {
                     type="password"
                 />
                 <button disabled={isLoading}>Login</button>
+                <Link to="/signup" className="helper-link">Don't have account? Sign up!</Link>
             </form>
         );
     }

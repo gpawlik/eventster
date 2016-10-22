@@ -11,7 +11,7 @@ class MessageItem extends React.Component {
     render() {
         const { id, text } = this.props.message;
         return (
-            <li>{text} <button onClick={this.onClick}>delete</button></li>
+            <li>{text} <span onClick={this.onClick} className="delete-icon">x</span></li>
         );
     }
 }

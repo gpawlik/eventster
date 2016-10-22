@@ -14,35 +14,38 @@ class NavigationBar extends React.Component {
         
         const { isAuthenticated, user } = this.props.auth;
         
+        // TODO: any way to avoid spans wrapping list items
         const userLinks = (
-            <ul>
+            <span>
                 <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>  
                 <li><Link to={'/user/' + user.username}>My profile</Link></li>       
-            </ul>
+            </span>
         );
         
         const guestLinks = (
-            <ul>
+            <span>
                 <li><Link to="/login">Login</Link></li>
                 <li><Link to="/signup">Signup</Link></li>            
-            </ul>
+            </span>
         );
         
         const adminLinks = (
-            <ul>
+            <span>
                 <li><Link to="/users">Users</Link></li> 
                 <li><Link to="/new-event">New event</Link></li> 
-            </ul>
+            </span>
         );
         
         return (
             <nav className="MainNav">
                 <ul>
                     <li><Link to="/">Events</Link></li>                                                   
-                    <li><Link to="/about">About</Link></li>                                        
-                </ul>
-                { user.isAdmin ? adminLinks : '' }
-                { isAuthenticated ? userLinks : guestLinks } 
+                    <li><Link to="/about">About</Link></li>
+                    { user.isAdmin ? adminLinks : '' }                                        
+                </ul>                
+                <ul className="AccountLinks">
+                    { isAuthenticated ? userLinks : guestLinks } 
+                </ul>                
             </nav>
         )        
     }       

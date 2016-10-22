@@ -9,11 +9,29 @@ class EventPage extends React.Component {
         return (
             <div className="EventProfile">
                 <h3>Event Profile</h3>
-                <p>Title: {title}</p>
-                <p>Headline: {headline}</p>
-                <p>Description: {description}</p>
-                <p>Event date: {eventDateFormatted}</p>
-                <p>Created: {timeCreated}</p>
+                <div className="profile-image"></div>
+                <div className="content-wrapper">
+                    <p>
+                        <span className="profile-label">Title</span> 
+                        {title}
+                    </p>
+                    <p>
+                        <span className="profile-label">Headline</span> 
+                        {headline}
+                    </p>
+                    <p>
+                        <span className="profile-label">Description</span> 
+                        {description}
+                    </p>
+                    <p>
+                        <span className="profile-label">Event date</span> 
+                        {eventDateFormatted}
+                    </p>
+                    <p>
+                        <span className="profile-label">Created</span> 
+                        {timeCreated}
+                    </p>
+                </div>
             </div>
         )        
     }

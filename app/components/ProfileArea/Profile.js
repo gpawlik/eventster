@@ -8,9 +8,21 @@ class Profile extends React.Component {
         return (
             <div className="UserProfile">
                 <h3>User Profile</h3>
-                <p>Name: {username}</p>
-                <p>Email: {email}</p>
-                <p>Created: {timeCreated}</p>
+                <div className="content-wrapper">
+                    <span className="profile-thumbnail"></span>
+                    <p>
+                        <span className="profile-label">Name</span> 
+                        {username}
+                    </p>
+                    <p>
+                        <span className="profile-label">Email</span> 
+                        {email}
+                    </p>
+                    <p>
+                        <span className="profile-label">Created</span> 
+                        {timeCreated}
+                    </p>                   
+                </div>
             </div>
         )        
     }

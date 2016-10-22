@@ -10,9 +10,12 @@ class UsersList extends React.Component {
                 <ul className="UsersList">
                 {users.map((user, idx) => {
                     return (
-                        <li key={idx}>{user.username} 
-                            <button onClick={() => deleteUser(user._id) }>delete</button>  
-                            <Link to={'/user/' + user.username}>Show profile!</Link>
+                        <li key={idx}>
+                            <Link to={'/user/' + user.username}>
+                                <span className="thumbnail-small"></span>
+                                <span className="list-item-title">{user.username}</span> 
+                            </Link>                            
+                            <span onClick={() => deleteUser(user._id) } className="delete-icon">x</span>                             
                         </li>
                     );
                 })}

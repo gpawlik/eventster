@@ -10,7 +10,9 @@ class Login extends React.Component {
         return(
             <div>
                 <h3>Login Area</h3>
-                <LoginForm login={login} />
+                <div className="content-wrapper">
+                    <LoginForm login={login} />
+                </div>                
             </div>
         );
     }

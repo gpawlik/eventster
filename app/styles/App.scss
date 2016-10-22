@@ -1,40 +1,133 @@
-.App {
-    padding: 20px;
-    h3 {
-        color: orangered;
-        margin: 20px auto;
-    }
-    ul {
-        list-style-type: none;
+@import 'utils/colors';
+
+body {
+    font-family: 'Lato', cursive;
+}
+body, h1, h2, h3, ul, li {
+    padding: 0;
+    margin: 0;
+}
+ul {
+    list-style-type: none;
+}
+a {
+    text-decoration: none;
+    color: #333;
+}
+.Header {
+    background: $primary-dark;
+    padding: 10px 25px;
+    h1 {
+        color: $primary-light;
     }
 }
-.UsersList {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+.MainNav {
+    background: $secondary-light;
+    ul {
+        display: inline-block;
+        &.AccountLinks {
+            background: darken($secondary-light, 10%);
+        }
+    }
     li {
-        padding: 10px 25px;
-        background-color: #dedede;
-        &:nth-child(odd) {
-            background-color: #cecece;
+        display: inline-block;
+        a {
+            display:block;
+            padding: 5px 15px; 
+            color: $primary-light;           
         }
     }
 }
+.MainLayout {
+    h3 {
+        color: $primary-dark;
+        padding: 10px 25px;
+    }
+}
+.UsersList,
 .EventsList {
     list-style-type: none;
     margin: 0;
     padding: 0;
     li {
-        padding: 10px 25px;
-        background-color: #3399ee;
+        padding: 10px 35px 10px 25px;
+        background-color: $primary-light;
+        position: relative;       
         &:nth-child(odd) {
-            background-color: #3399bb;
+            background-color: darken($primary-light, 10%);
         }
-    }    
+        a {
+            display: flex;
+            align-items: center;                         
+        }
+        .delete-icon {
+            color: $primary-dark;
+        }
+    }
+}
+.thumbnail-small {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: $secondary-dark;     
+}
+.list-item-title {
+    padding: 0 15px;
+}
+.delete-icon {    
+    font-weight: bold;
+    cursor:pointer;
+    text-align: center;    
+    display: block;
+    width: 20px;
+    height: 20px;
+    line-height:20px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translate(0, -50%)
+}
+.helper-link {
+    display: block;
+    font-size: 0.8em;
 }
 .UserProfileForm {
     input, select {
         display: block;
         margin-bottom: 10px;
+    }
+}
+.content-wrapper {
+    padding: 0 25px;
+}
+.profile-image {
+    display: block;
+    height: 250px;
+    background-color: $secondary-dark; 
+}
+.profile-thumbnail {
+    display: block;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: $secondary-dark; 
+    border: 7px solid lighten($secondary-dark, 10%);   
+    margin: 0 auto;
+}
+.profile-label {
+    color: $primary-dark;
+    display: block;
+    font-size: 0.8em;
+}
+.Messages {
+    background-color: $primary-dark;
+    color: $primary-light;
+    li {
+        padding: 5px 25px;
+        position: relative;
+        .delete-icon {
+            color: $primary-light;            
+        }
     }
 }
