@@ -2,21 +2,34 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import EventsList from './EventsList';
+import Preloader from '../../common/Preloader';
 import { getEvents, deleteEvent } from '../../actions/eventActions';
 import store from '../../store';
 
 class EventsContainer extends React.Component {
     
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading: true
+        }
+    }    
+    
     componentDidMount() {
-        this.props.getEvents();
-    }
+        this.props.getEvents().then(res => {
+            this.setState({ isLoading: false });
+        });
+    }         
 
-    render() {         
+    render() {      
         return (
-            <EventsList 
-                events={this.props.events}
-                deleteEvent={this.props.deleteEvent}                
-            />
+            <div>
+                {this.state.isLoading && <Preloader />}
+                <EventsList 
+                    events={this.props.events}
+                    deleteEvent={this.props.deleteEvent}             
+                />
+            </div>
         )
     }        
 };

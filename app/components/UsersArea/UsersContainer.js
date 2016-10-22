@@ -2,21 +2,34 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import UsersList from './UsersList';
+import Preloader from '../../common/Preloader';
 import { getUsers, deleteUser } from '../../actions/userActions';
 import store from '../../store';
 
 class UsersContainer extends React.Component {
     
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading: true
+        }
+    }     
+    
     componentDidMount() {
-        this.props.getUsers()
+        this.props.getUsers().then(res => {
+            this.setState({ isLoading: false });
+        });
     }
 
     render() {         
         return (
-            <UsersList 
-                users={this.props.users}
-                deleteUser={this.props.deleteUser}             
-            />
+            <div>
+                {this.state.isLoading && <Preloader />}
+                <UsersList 
+                    users={this.props.users}
+                    deleteUser={this.props.deleteUser}             
+                />
+            </div>
         )
     }        
 };

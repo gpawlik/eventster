@@ -2,18 +2,31 @@ import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import EventPage from './EventPage';
+import Preloader from '../../common/Preloader';
 import { getEvent } from '../../actions/eventActions';
 import store from '../../store';
 
-class EventPageContainer extends React.Component {
+class EventPageContainer extends React.Component {   
+    
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoading: true
+        }
+    }       
     
     componentDidMount() {
-        this.props.getEvent(this.props.params.eventId);
+        this.props.getEvent(this.props.params.eventId).then(res => {
+            this.setState({ isLoading: false });
+        });
     }
 
-    render() {         
+    render() {        
         return (
-            <EventPage event={this.props.event} />
+            <div>
+                {this.state.isLoading && <Preloader />}
+                <EventPage event={this.props.event} />
+            </div>            
         )
     }        
 };

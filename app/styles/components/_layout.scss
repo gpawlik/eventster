@@ -11,6 +11,7 @@
 
 .MainContent {
     flex: 1 0 auto; // solves sticky footer
+    position: relative;
     h3 {
         color: $primary-dark;
         padding: 10px 25px;

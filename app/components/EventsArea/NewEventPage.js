@@ -14,7 +14,7 @@ class NewEventPage extends React.Component {
             description: '',
             eventDate: '',
             errors: {},
-            isLoading: false
+            isFormLoading: false
         }
         
         this.onChange = this.onChange.bind(this);
@@ -37,12 +37,12 @@ class NewEventPage extends React.Component {
                 this.context.router.push('/')
             })
             .catch(
-                (err) => {this.setState({ errors: err.response.data, isLoading: false })}
+                (err) => {this.setState({ errors: err.response.data, isFormLoading: false })}
             );
     }
     
     render () {
-        const { title, headline, description, eventDate, errors, isLoading } = this.state;
+        const { title, headline, description, eventDate, errors, isFormLoading } = this.state;
         
         return (
             <div>
@@ -81,7 +81,7 @@ class NewEventPage extends React.Component {
                             onChange={this.onChange}
                         />
                         
-                        <button type="submit">Submit event</button>                
+                        <button type="submit" className="button-primary">Submit event</button>                
                     </div>
                 </form>
             </div>
