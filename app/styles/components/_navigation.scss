@@ -1,18 +1,55 @@
 .MainNav {
     background: $secondary-light;
-    display:flex;
+    display:flex;    
     ul {      
-        flex-grow: 1;          
+        &.MainLinks {
+            flex-grow: 1;    
+        }                  
         &.AccountLinks {
             background: darken($secondary-light, 10%);
         }
+        li {
+            display: inline-block;
+            a {
+                display:block;
+                padding: 5px 15px; 
+                color: $primary-light;  
+                cursor: pointer;         
+            }
+        }        
     }
-    li {
-        display: inline-block;
-        a {
-            display:block;
-            padding: 5px 15px; 
-            color: $primary-light;           
+    .close-icon {
+        display: none;
+    }
+    &.isMobile {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 999;
+        flex-direction: column;
+        ul {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            li {
+                a {
+                    font-size: 2em;
+                    font-weight: bold;
+                    padding: 20px 25px;
+                    &:hover {
+                        color: $primary-dark;
+                    }
+                }
+            }
+        }
+        .close-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: block;
         }
     }
 }

@@ -7,6 +7,7 @@ import eventsReducer from './events-reducer';
 import eventReducer from './event-reducer';
 import flashReducer from './flash-reducer';
 import authReducer from './auth-reducer';
+import uiReducer from './ui-reducer';
 
 // Combine Reducers
 var rootReducer = combineReducers({
@@ -15,7 +16,8 @@ var rootReducer = combineReducers({
     eventsState: eventsReducer,
     eventState: eventReducer,    
     flashState: flashReducer,
-    authState: authReducer
+    authState: authReducer,
+    uiState: uiReducer
 });
 
 export default rootReducer;

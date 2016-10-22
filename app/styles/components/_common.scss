@@ -1,6 +1,6 @@
 //TODO: normalize in more professional way
-* {
-    box-sizing: border-box;
+*, *:after, *:before {
+  box-sizing: border-box;
 }
 html {
     height: 100%;

@@ -2,50 +2,54 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/authActions';
+import { toggleNavigation } from '../../actions/uiActions';
+import classNames from 'classnames';
 
 class NavigationBar extends React.Component {  
 
     logout (e) {
         e.preventDefault();
         this.props.logout();
-    }    
+    }  
+    
+    toggleNavigation(toggleState) {
+        if(toggleState !== this.props.ui.isMobileNavigationOpen) {
+            this.props.toggleNavigation(toggleState);    
+        }        
+    }      
      
     render() {
         
         const { isAuthenticated, user } = this.props.auth;
+        const { isMobileNavigationOpen } = this.props.ui;
+                
+        const userLinks = [
+            (<li key="0"><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>),
+            (<li key="1"><Link to={'/user/' + user.username}>My profile</Link></li>)
+        ];
         
-        // TODO: any way to avoid spans wrapping list items
-        const userLinks = (
-            <span>
-                <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>  
-                <li><Link to={'/user/' + user.username}>My profile</Link></li>       
-            </span>
-        );
+        const guestLinks = [
+            (<li key="0"><Link to="/login">Login</Link></li>),
+            (<li key="1"><Link to="/signup">Signup</Link></li>)
+        ];
         
-        const guestLinks = (
-            <span>
-                <li><Link to="/login">Login</Link></li>
-                <li><Link to="/signup">Signup</Link></li>            
-            </span>
-        );
+        const adminLinks = [
+            (<li key="0"><Link to="/users">Users</Link></li>),
+            (<li key="1"><Link to="/new-event">New event</Link></li>)
+        ];
         
-        const adminLinks = (
-            <span>
-                <li><Link to="/users">Users</Link></li> 
-                <li><Link to="/new-event">New event</Link></li> 
-            </span>
-        );
+        const navClassName = classNames('MainNav', {'isMobile': isMobileNavigationOpen});
         
         return (
-            <nav className="MainNav">
-                <ul>
+            <nav className={navClassName} onClick={this.toggleNavigation.bind(this, false)}>
+                <ul className="MainLinks">
                     <li><Link to="/">Events</Link></li>                                                   
                     <li><Link to="/about">About</Link></li>
                     { user.isAdmin ? adminLinks : '' }                                        
                 </ul>                
                 <ul className="AccountLinks">
                     { isAuthenticated ? userLinks : guestLinks } 
-                </ul>                
+                </ul>           
             </nav>
         )        
     }       
@@ -53,13 +57,15 @@ class NavigationBar extends React.Component {
 
 NavigationBar.propTypes = {
     auth: React.PropTypes.object.isRequired,
-    logout: React.PropTypes.func.isRequired
+    logout: React.PropTypes.func.isRequired,
+    toggleNavigation: React.PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
     return {
-        auth: state.authState
+        auth: state.authState,
+        ui: state.uiState
     }
 }
 
-export default connect(mapStateToProps, { logout })(NavigationBar);
+export default connect(mapStateToProps, { logout, toggleNavigation })(NavigationBar);

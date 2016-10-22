@@ -33,8 +33,8 @@ router.post('/', adminRestricted, function(req, res) {
 router.get('/', (req, res) => {    
     Event.find().limit(20).sort({ createdAt: 1 }).exec(function(err, events) {
         if (err) res.send(err);   
-        setTimeout(() => res.json(events), 2000)         
-        //res.json(events); // just to see well the preloader
+        //setTimeout(() => res.json(events), 2000)         
+        res.json(events);
     });
 });
 
