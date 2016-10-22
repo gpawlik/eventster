@@ -1,5 +1,8 @@
 @import 'utils/colors';
 
+* {
+    box-sizing: border-box;
+}
 body {
     font-family: 'Lato', cursive;
 }
@@ -13,7 +16,11 @@ ul {
 a {
     text-decoration: none;
     color: #333;
+    &:hover {
+        color: $primary-dark;
+    }
 }
+
 .Header {
     background: $primary-dark;
     padding: 10px 25px;
@@ -23,8 +30,9 @@ a {
 }
 .MainNav {
     background: $secondary-light;
-    ul {
-        display: inline-block;
+    display:flex;
+    ul {      
+        flex-grow: 1;          
         &.AccountLinks {
             background: darken($secondary-light, 10%);
         }
@@ -65,6 +73,14 @@ a {
         }
     }
 }
+.EventsList {
+    li {
+        a {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    }
+}
 .thumbnail-small {
     display: inline-block;
     width: 35px;
@@ -72,8 +88,15 @@ a {
     border-radius: 50%;
     background-color: $secondary-dark;     
 }
-.list-item-title {
+.user-item-title {
     padding: 0 15px;
+}
+.list-item-title {
+    display:block;  
+    font-weight: bold;  
+}
+.list-item-headline {
+    display:block;    
 }
 .delete-icon {    
     font-weight: bold;
@@ -91,6 +114,7 @@ a {
 .helper-link {
     display: block;
     font-size: 0.8em;
+    text-align: center;
 }
 .UserProfileForm {
     input, select {
@@ -129,5 +153,46 @@ a {
         .delete-icon {
             color: $primary-light;            
         }
+    }
+}
+
+.form-box {
+    padding: 20px 0;
+}
+.form-input-group {
+    margin-bottom: 15px;
+}
+.form-label {
+    display: block;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    .form-input-error & {
+        color: $primary-dark;
+    }
+}
+.form-input {
+    width: 100%;
+    padding: 10px 10px;
+    border-radius: 3px;
+    border: 1px solid $secondary-light;
+}
+.form-error-label {
+    font-size: 0.8em;
+    color: $primary-dark;
+}
+.button-primary {
+    width: 100%;
+    background-color: $primary-dark;
+    color: $primary-light;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 5px;    
+    &:hover {
+        background-color: darken($primary-dark, 5%)
     }
 }

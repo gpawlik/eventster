@@ -11,7 +11,10 @@ class EventsList extends React.Component {
                     {events.map((event, idx) => {
                         return (
                             <li key={idx}>                                                                
-                                <Link to={'/event/' + event._id}>{event.title}</Link>
+                                <Link to={'/event/' + event._id}>
+                                    <span className="list-item-title">{event.title}</span>
+                                    <span className="list-item-headline">{event.headline}</span>
+                                </Link>
                                 <span onClick={() => deleteEvent(event._id) } className="delete-icon">x</span>
                             </li>
                         );

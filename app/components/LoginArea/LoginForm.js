@@ -46,7 +46,7 @@ class LoginForm extends React.Component {
         // deconstruct variables from state
         const { identifier, password, errors, isLoading } = this.state;
         return(
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit} className="form-box">
             
                 { errors.form }
             
@@ -65,7 +65,7 @@ class LoginForm extends React.Component {
                     onChange={this.onChange}
                     type="password"
                 />
-                <button disabled={isLoading}>Login</button>
+                <button disabled={isLoading} className="button-primary">Login</button>
                 <Link to="/signup" className="helper-link">Don't have account? Sign up!</Link>
             </form>
         );

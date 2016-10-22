@@ -1,18 +1,19 @@
 import React from 'react';
+import classNames from 'classnames';
 
 const TextFieldGroup = ({ field, value, label, error, type, onChange, checkUserExists }) => {
   return (
-    <div className={'error_' + error}>
-      <label className="control-label">{label}</label>
+    <div className={classNames({ 'form-input-group': true, 'form-input-error': !!error })}>
+      <label className="form-label">{label}</label>
       <input
         onChange={onChange}
         onBlur={checkUserExists}
         value={value}
         type={type}
         name={field}
-        className="form-control"
+        className="form-input"
       />
-    {error && <span className="help-block">{error}</span>}
+    {error && <span className="form-error-label">{error}</span>}
     </div>  );
 }
 

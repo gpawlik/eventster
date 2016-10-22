@@ -13,7 +13,7 @@ class UsersList extends React.Component {
                         <li key={idx}>
                             <Link to={'/user/' + user.username}>
                                 <span className="thumbnail-small"></span>
-                                <span className="list-item-title">{user.username}</span> 
+                                <span className="user-item-title">{user.username}</span> 
                             </Link>                            
                             <span onClick={() => deleteUser(user._id) } className="delete-icon">x</span>                             
                         </li>

@@ -75,7 +75,7 @@ class LoginForm extends React.Component {
         // deconstruct variables from state
         const { username, email, password, passwordConfirmation, errors, isLoading, invalid } = this.state;
         return(
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={this.onSubmit} className="form-box">
                 <TextFieldGroup 
                     field="username"
                     label="Username"
@@ -109,7 +109,7 @@ class LoginForm extends React.Component {
                     onChange={this.onChange}
                     type="password"
                 />
-                <button disabled={isLoading || invalid}>Login</button>
+                <button disabled={isLoading || invalid} className="button-primary">Sign up!</button>
             </form>
         );
     }

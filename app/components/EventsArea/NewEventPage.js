@@ -45,43 +45,46 @@ class NewEventPage extends React.Component {
         const { title, headline, description, eventDate, errors, isLoading } = this.state;
         
         return (
-            <form onSubmit={this.onSubmit}>
+            <div>
                 <h3>New Event</h3>
-                
-                <TextFieldGroup 
-                    field="title"
-                    label="Event title"
-                    value={title}
-                    error={errors.title}
-                    onChange={this.onChange}
-                />
-                
-                <TextFieldGroup 
-                    field="headline"
-                    label="Event headline"
-                    value={headline}
-                    error={errors.headline}
-                    onChange={this.onChange}
-                />
-                
-                <TextFieldGroup 
-                    field="description"
-                    label="Event description"
-                    value={description}
-                    error={errors.description}
-                    onChange={this.onChange}
-                />
-                
-                <TextFieldGroup 
-                    field="eventDate"
-                    label="Event date"
-                    value={eventDate}
-                    error={errors.eventDate}
-                    onChange={this.onChange}
-                />
-                
-                <button type="submit">Submit event</button>
-            </form>
+                <form onSubmit={this.onSubmit} className="form-box">                                
+                    <div className="content-wrapper">
+                        <TextFieldGroup 
+                            field="title"
+                            label="Event title"
+                            value={title}
+                            error={errors.title}
+                            onChange={this.onChange}
+                        />
+                        
+                        <TextFieldGroup 
+                            field="headline"
+                            label="Event headline"
+                            value={headline}
+                            error={errors.headline}
+                            onChange={this.onChange}
+                        />
+                        
+                        <TextFieldGroup 
+                            field="description"
+                            label="Event description"
+                            value={description}
+                            error={errors.description}
+                            onChange={this.onChange}
+                        />
+                        
+                        <TextFieldGroup 
+                            field="eventDate"
+                            label="Event date"
+                            value={eventDate}
+                            error={errors.eventDate}
+                            onChange={this.onChange}
+                        />
+                        
+                        <button type="submit">Submit event</button>                
+                    </div>
+                </form>
+            </div>
         );
     }
     
