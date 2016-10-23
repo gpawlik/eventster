@@ -5,7 +5,7 @@ class Footer extends React.Component {
         return (
             <div className="Footer">
                 <p className="footer-headline">
-                    Eventster App Boilerplate
+                    [APP-NAME]
                 </p>
                 <ul className="footer-links">
                     <li><a href="#">Facebook</a></li>

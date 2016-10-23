@@ -6,7 +6,7 @@ class UsersList extends React.Component {
         const { users, deleteUser } = this.props;            
         return (
             <div className="UsersListArea">
-                <h3>Users list?</h3>
+                <h3>Users list</h3>
                 <ul className="UsersList">
                 {users.map((user, idx) => {
                     return (

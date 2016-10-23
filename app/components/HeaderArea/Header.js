@@ -14,7 +14,7 @@ class Header extends React.Component {
         //const 
         return (
             <div className="Header">
-                <h1>Eventster</h1>
+                <h1>[APP-NAME]</h1>
                 <div 
                     className={classNames('menu-icon', { 'open': isMobileNavigationOpen })} 
                     onClick={this.toggleNavigation.bind(this, !isMobileNavigationOpen)}>

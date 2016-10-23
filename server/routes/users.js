@@ -31,7 +31,7 @@ function validateInput(data, otherValidations) {
 }
 
 // Create a user
-router.post('/', adminRestricted, function(req, res) {				
+router.post('/', function(req, res) {				
 		
     validateInput(req.body, signupValidations).then(({ errors, isValid }) => {        
         if (isValid) {

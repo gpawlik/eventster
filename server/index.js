@@ -74,6 +74,7 @@ app.get('*', function (req, res, next){
 		res.sendFile(filename);
 	}
 	else {
+		// after: https://github.com/ampedandwired/html-webpack-plugin/issues/145
 		compiler.outputFileSystem.readFile(filename, function(err, result){
 			if (err) {
 				return next(err);
