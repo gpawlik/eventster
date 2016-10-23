@@ -1,12 +1,13 @@
-import Validator from 'validator';
+//import validator from 'validator';
+var validator = require('validator');
 import isEmpty from 'lodash/isEmpty';
 
 const validateInput = function(data) {
     let errors = {};
-    if (Validator.isEmpty(data.identifier)) {
+    if (validator.isEmpty(data.identifier)) {
         errors.identifier = 'Enter a Title';
     }
-    if (Validator.isEmpty(data.password)) {
+    if (validator.isEmpty(data.password)) {
         errors.password = 'Enter a Password';
     }
     return { 

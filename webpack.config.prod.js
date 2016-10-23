@@ -3,23 +3,21 @@ var webpack = require('webpack');
 var combineLoaders = require('webpack-combine-loaders');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var autoprefixer = require('autoprefixer');
+
+process.env.NODE_ENV = 'production';
 
 module.exports = {
   devtool: 'source-map',
   entry: {
-    app: './src/index.js',
+    app: path.join(__dirname, '/app/index.js'),
   },
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'javascripts-[chunkhash].js'
+    path: path.join(__dirname, 'public'),
+    filename: 'js/javascripts-[chunkhash].js'
   },
   plugins: [
-    new ExtractTextPlugin('styles-[chunkhash].css'),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
-    }),
+    new ExtractTextPlugin('style/styles-[chunkhash].css'),
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
         screw_ie8: true,
@@ -56,8 +54,18 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       loaders: ['babel'],
-      include: path.join(__dirname, 'src')
-    }, {
+      include: [
+        path.join(__dirname, 'app'),
+        path.join(__dirname, 'server/shared')
+      ]
+    }, 
+    {
+      test: /\.scss$/,
+      loader: ExtractTextPlugin.extract('style', 'css!postcss-loader!sass?sourceMap', {
+        publicPath: 'public',
+      }),
+    }
+      /*{
       test: /\.css$/,
       loader: ExtractTextPlugin.extract(
         'style-loader',
@@ -69,6 +77,12 @@ module.exports = {
           }
         }])
       )
-    }]
+    }*/]
+  },
+  postcss: [
+    autoprefixer(),
+  ],
+  resolve: {
+    extensions: ['', '.js', '.scss']
   }
 };

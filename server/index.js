@@ -15,7 +15,8 @@ import users from './routes/users';
 import events from './routes/events';
 
 const app = express();
-const port = process.env.PORT || 3000; 
+const isProduction = process.env.NODE_ENV === 'production';
+const port = isProduction ? process.env.PORT : 3000; 
 const db_address = "localhost:27017/eventster";
 
 // Log requests to the console
@@ -23,12 +24,14 @@ app.use(morgan('dev'));
 
 // Webpack middleware
 const compiler = webpack(webpackConfig);
-app.use(webpackMiddleware(compiler, {
-    hot: true,
-    publicPath: webpackConfig.output.publicPath,
-    noInfo: true // eliminate noise from webpack
-}));
-app.use(webpackHotMiddleware(compiler));
+if (!isProduction) {	
+	app.use(webpackMiddleware(compiler, {
+		hot: true,
+		publicPath: webpackConfig.output.publicPath,
+		noInfo: true // eliminate noise from webpack
+	}));
+	app.use(webpackHotMiddleware(compiler));	
+}
 
 // Configure body parser - Let us pull POST content from HTTP request
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -64,9 +67,22 @@ app.use(express.static('public'));
 // Handle every other route with index.html, which will contain
 // a script tag to your application's JavaScript file(s).
 // All the rest of the routing is a React concern.
-app.get('*', function (request, response){
-	console.log('Request: [GET]', request.originalUrl);
-	response.sendFile(path.join(__dirname, './../public/index.html'));
+app.get('*', function (req, res, next){
+	console.log('Request: [GET]', req.originalUrl);
+	const filename = path.join(__dirname, './../public/index.html');
+	if (isProduction) {
+		res.sendFile(filename);
+	}
+	else {
+		compiler.outputFileSystem.readFile(filename, function(err, result){
+			if (err) {
+				return next(err);
+			}
+			res.set('content-type','text/html');
+			res.send(result);
+			res.end();
+		});		
+	}
 })
 
 // START THE SERVER

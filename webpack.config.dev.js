@@ -1,5 +1,9 @@
 import path from 'path';
 import webpack from 'webpack';
+import autoprefixer from 'autoprefixer';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+
+process.env.NODE_ENV = 'development';
 
 export default {
   devtools: 'eval-source-map',
@@ -8,14 +12,18 @@ export default {
     path.join(__dirname, '/app/index.js'),
   ],
   output: {
-    path: '/', // no need to specify, webpack will load it in memory 
-    publicPath: '/js',
+    path: path.join(__dirname, 'public'), // no need to specify, webpack will load it in memory 
+    publicPath: '/public/',
     filename: 'main.js'
   },
   plugins: [
     new webpack.NoErrorsPlugin(), // manages errors in cleaner way
     new webpack.optimize.OccurenceOrderPlugin(), // order of build hashes
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      template: 'index.template.ejs',
+      inject: 'body'
+    }),
   ],
   module: {
     loaders: [
@@ -29,11 +37,14 @@ export default {
       },  
       {
         test: /\.scss$/,      
-        loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
+        loaders: ['style', 'css?postcss-loader', 'sass?sourceMap']
       }
     ]
-  },
+  }, 
+  postcss: [
+    autoprefixer(),
+  ],
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.scss']
   }
 };
